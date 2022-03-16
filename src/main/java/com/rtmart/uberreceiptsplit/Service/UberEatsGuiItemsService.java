@@ -35,12 +35,25 @@ public class UberEatsGuiItemsService {
         return SplitMemoProc(memo);
     }
 
+    /**
+     * 將傳進來的MEMO拆解
+     * @param memo
+     * @return List<Item>
+     */
     public List<Item> SplitMemoProc(String memo) {
         String[] list = memo.split("\\|\\|");
 
         List<Item> itemsList = new ArrayList<>();
 
         for (String s : list) {
+
+            /*
+             * 因為品名的特殊符號太多不好處理, 所以用"#"拆成前後兩段處理
+             * 例如.
+             *   品名: 2. (e)台灣乾薑600g+-5%/盒#753525-106 x 1 = 106
+             *   拆成: 第一段 "2. (e)台灣乾薑600g+-5%/盒"
+             *        第二段 "753525-106 x 1 = 106"
+             */
             String[] tmp = s.split("#");
 
             Item item = new Item();
@@ -78,6 +91,11 @@ public class UberEatsGuiItemsService {
         return itemsList;
     }
 
+    /**
+     * 判斷是否符合正規表達式
+     * @param s
+     * @return
+     */
     public static Matcher checkString(String s) {
         Matcher matcher = pattern.matcher(s);
         if (!matcher.matches())
