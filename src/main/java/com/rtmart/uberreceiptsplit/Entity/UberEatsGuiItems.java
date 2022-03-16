@@ -24,18 +24,5 @@ public class UberEatsGuiItems {
     private Integer type;
 
     private List<Item> items;
-/*
-    @JsonProperty(value = "ITEM_NO")
-    private Integer itemNo;
-
-    @JsonProperty(value = "SALES_AMOUNT")
-    private Integer salesAmount;
-
-    @JsonProperty(value = "QTY")
-    private Integer qty;
-
-    @JsonProperty(value = "TOTAL_PRICE")
-    private Integer totalPrice;
-*/
 
 }
