@@ -3,6 +3,8 @@ package com.rtmart.uberreceiptsplit.Entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UberEatsGuiItems {
 
@@ -21,7 +23,7 @@ public class UberEatsGuiItems {
     @JsonProperty(value = "TYPE")
     private Integer type;
 
-    private Items items;
+    private List<Item> items;
 /*
     @JsonProperty(value = "ITEM_NO")
     private Integer itemNo;
