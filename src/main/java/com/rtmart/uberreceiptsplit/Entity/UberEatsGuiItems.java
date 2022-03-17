@@ -23,6 +23,7 @@ public class UberEatsGuiItems {
     @JsonProperty(value = "TYPE")
     private Integer type;
 
+    @JsonProperty(value = "ITEMS")
     private List<Item> items;
 
 }

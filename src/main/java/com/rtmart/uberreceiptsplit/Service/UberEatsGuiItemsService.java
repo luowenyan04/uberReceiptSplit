@@ -37,6 +37,7 @@ public class UberEatsGuiItemsService {
 
     /**
      * 將傳進來的MEMO拆解
+     *
      * @param memo
      * @return List<Item>
      */
@@ -51,8 +52,8 @@ public class UberEatsGuiItemsService {
              * 因為品名的特殊符號太多不好處理, 所以用"#"拆成前後兩段處理
              * 例如.
              *   品名: 2. (e)台灣乾薑600g+-5%/盒#753525-106 x 1 = 106
-             *   拆成: 第一段 "2. (e)台灣乾薑600g+-5%/盒"
-             *        第二段 "753525-106 x 1 = 106"
+             *   拆成: 第一段 -> "2. (e)台灣乾薑600g+-5%/盒"
+             *        第二段 -> "753525-106 x 1 = 106"
              */
             String[] tmp = s.split("#");
 
@@ -66,7 +67,7 @@ public class UberEatsGuiItemsService {
             item.setQty(Integer.parseInt(itemMatcher.group(3)));
             item.setTotalAmount(Integer.parseInt(itemMatcher.group(4)));
 
-            System.out.println(item);
+//            System.out.println(item);
 
             Optional<Item> itemOptional = itemsList.stream()
                     .filter(i -> i.getItemNo().equals(item.getItemNo()))
@@ -93,6 +94,7 @@ public class UberEatsGuiItemsService {
 
     /**
      * 判斷是否符合正規表達式
+     *
      * @param s
      * @return
      */
@@ -103,4 +105,12 @@ public class UberEatsGuiItemsService {
         return matcher;
     }
 
+    /**
+     * Insert into UberEatsGuiItems
+     * @param uberEatsGuiItems
+     * @return
+     */
+    public String insUberEatsGuiItems(UberEatsGuiItems uberEatsGuiItems) {
+        return itemsDao.insUberEatsGuiItems(uberEatsGuiItems);
+    }
 }

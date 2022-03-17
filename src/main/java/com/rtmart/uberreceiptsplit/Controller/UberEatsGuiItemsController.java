@@ -28,6 +28,7 @@ public class UberEatsGuiItemsController {
         UberEatsGuiItems uberEatsGuiItems = request;
         List<Item> memo = itemsService.getItemsMemo(request);
         uberEatsGuiItems.setItems(memo);
+        itemsService.insUberEatsGuiItems(uberEatsGuiItems);
         return uberEatsGuiItems;
     }
 
