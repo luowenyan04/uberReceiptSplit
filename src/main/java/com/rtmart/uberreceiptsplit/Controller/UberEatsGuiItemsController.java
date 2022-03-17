@@ -25,11 +25,10 @@ public class UberEatsGuiItemsController {
 
     @PostMapping("/MemoSplit")
     public UberEatsGuiItems SplitMemo(@RequestBody UberEatsGuiItems request) {
-        UberEatsGuiItems uberEatsGuiItems = request;
         List<Item> memo = itemsService.getItemsMemo(request);
-        uberEatsGuiItems.setItems(memo);
-        itemsService.insUberEatsGuiItems(uberEatsGuiItems);
-        return uberEatsGuiItems;
+        request.setItems(memo);
+        itemsService.insUberEatsGuiItems(request);
+        return request;
     }
 
 }
