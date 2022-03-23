@@ -24,6 +24,10 @@ public class UberEatsGuiItemsService {
         this.itemsDao = itemsDao;
     }
 
+    /**
+     * 清除歷史資料
+     * @param request
+     */
     public void chkItemExists(UberEatsGuiItems request) {
         String storeNo = request.getStore();
         String guiNo = request.getGuiNo();
