@@ -27,7 +27,7 @@ public class UberEatsGuiItemsController {
     public UberEatsGuiItems SplitMemo(@RequestBody UberEatsGuiItems request) {
         List<Item> memo = itemsService.getItemsMemo(request);
         request.setItems(memo);
-        itemsService.insUberEatsGuiItems(request);
+        itemsService.insUberEatsGuiItems(request.getStore(), request);
         return request;
     }
 

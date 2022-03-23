@@ -2,27 +2,23 @@ package com.rtmart.uberreceiptsplit.Repository;
 
 import com.rtmart.uberreceiptsplit.Entity.Item;
 import com.rtmart.uberreceiptsplit.Entity.UberEatsGuiItems;
-import com.rtmart.uberreceiptsplit.RowMapper.OrderMemoRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Repository
 public class UberEatsGuiItemsDao {
 
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
     @Autowired
-    public UberEatsGuiItemsDao(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
+    @Qualifier("stJDBC")
+    private Map<String, NamedParameterJdbcTemplate> namedParameterJdbcTemplateMap;
 
-    public String getOrdersMemo(String guiNo, Integer type, String insDate, String orderUuid) {
+    public String getOrdersMemo(String storeNo, String guiNo, Integer type, String insDate, String orderUuid) {
         String sql = "select memo " +
                 "from uber_eats_gui " +
                 "where gui_no = :guiNo " +
@@ -36,12 +32,10 @@ public class UberEatsGuiItemsDao {
         map.put("insDate", insDate);
         map.put("orderUuid", orderUuid);
 
-        List<String> list = namedParameterJdbcTemplate.query(sql, map, new OrderMemoRowMapper());
-
-        return list.get(0);
+        return namedParameterJdbcTemplateMap.get(storeNo).queryForObject(sql, map, String.class);
     }
 
-    public String insUberEatsGuiItems(UberEatsGuiItems uberEatsGuiItems) {
+    public String insUberEatsGuiItems(String storeNo, UberEatsGuiItems uberEatsGuiItems) {
         String sql = "insert into uber_eats_gui_items (" +
                 "order_uuid, " +
                 "ins_date, " +
@@ -77,7 +71,7 @@ public class UberEatsGuiItemsDao {
             parameterSources[i].addValue("totalAmount", item.getTotalAmount());
         }
 
-        namedParameterJdbcTemplate.batchUpdate(sql, parameterSources);
+        namedParameterJdbcTemplateMap.get(storeNo).batchUpdate(sql, parameterSources);
         return "Insert into UberEatsGuiItems 完成";
     }
 }

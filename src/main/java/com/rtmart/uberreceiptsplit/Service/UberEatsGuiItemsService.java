@@ -25,12 +25,15 @@ public class UberEatsGuiItemsService {
     }
 
     public List<Item> getItemsMemo(UberEatsGuiItems request) {
+        String storeNo = request.getStore();
         String guiNo = request.getGuiNo();
         Integer type = request.getType();
         String insDate = request.getInsDate();
         String orderUuid = request.getOrderUuid();
 
-        String memo = itemsDao.getOrdersMemo(guiNo, type, insDate, orderUuid);
+        String memo = itemsDao.getOrdersMemo(storeNo, guiNo, type, insDate, orderUuid);
+
+        System.out.println("xxx:" + memo);
 
         return SplitMemoProc(memo);
     }
@@ -48,7 +51,7 @@ public class UberEatsGuiItemsService {
 
         for (String s : list) {
 
-            /*
+            /**
              * 因為品名的特殊符號太多不好處理, 所以用"#"拆成前後兩段處理
              * 例如.
              *   品名: 2. (e)台灣乾薑600g+-5%/盒#753525-106 x 1 = 106
@@ -107,10 +110,11 @@ public class UberEatsGuiItemsService {
 
     /**
      * Insert into UberEatsGuiItems
+     *
      * @param uberEatsGuiItems
      * @return
      */
-    public String insUberEatsGuiItems(UberEatsGuiItems uberEatsGuiItems) {
-        return itemsDao.insUberEatsGuiItems(uberEatsGuiItems);
+    public String insUberEatsGuiItems(String storeNo, UberEatsGuiItems uberEatsGuiItems) {
+        return itemsDao.insUberEatsGuiItems(storeNo, uberEatsGuiItems);
     }
 }
