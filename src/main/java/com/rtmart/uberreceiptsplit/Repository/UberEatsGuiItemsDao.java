@@ -74,4 +74,20 @@ public class UberEatsGuiItemsDao {
         namedParameterJdbcTemplateMap.get(storeNo).batchUpdate(sql, parameterSources);
         return "Insert into UberEatsGuiItems 完成";
     }
+
+    public void delUberEatsItems(String storeNo, String guiNo, Integer type, String insDate, String orderUuid) {
+        String sql = "delete uber_eats_gui_items " +
+                "where gui_no = :guiNo " +
+                "and type = :type " +
+                "and ins_date = to_date(:insDate, 'yyyymmddhh24miss') " +
+                "and order_uuid = :orderUuid";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("guiNo", guiNo);
+        map.put("type", type);
+        map.put("insDate", insDate);
+        map.put("orderUuid", orderUuid);
+
+        namedParameterJdbcTemplateMap.get(storeNo).update(sql, map);
+    }
 }

@@ -25,6 +25,7 @@ public class UberEatsGuiItemsController {
 
     @PostMapping("/MemoSplit")
     public UberEatsGuiItems SplitMemo(@RequestBody UberEatsGuiItems request) {
+        itemsService.chkItemExists(request);
         List<Item> memo = itemsService.getItemsMemo(request);
         request.setItems(memo);
         itemsService.insUberEatsGuiItems(request.getStore(), request);

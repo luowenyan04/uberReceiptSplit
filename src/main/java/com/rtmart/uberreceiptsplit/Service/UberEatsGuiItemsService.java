@@ -24,6 +24,21 @@ public class UberEatsGuiItemsService {
         this.itemsDao = itemsDao;
     }
 
+    public void chkItemExists(UberEatsGuiItems request) {
+        String storeNo = request.getStore();
+        String guiNo = request.getGuiNo();
+        Integer type = request.getType();
+        String insDate = request.getInsDate();
+        String orderUuid = request.getOrderUuid();
+        itemsDao.delUberEatsItems(storeNo, guiNo, type, insDate, orderUuid);
+    }
+
+    /**
+     * 取得該訂單的發票備註
+     *
+     * @param request
+     * @return
+     */
     public List<Item> getItemsMemo(UberEatsGuiItems request) {
         String storeNo = request.getStore();
         String guiNo = request.getGuiNo();
@@ -33,9 +48,17 @@ public class UberEatsGuiItemsService {
 
         String memo = itemsDao.getOrdersMemo(storeNo, guiNo, type, insDate, orderUuid);
 
-        System.out.println("xxx:" + memo);
-
         return SplitMemoProc(memo);
+    }
+
+    /**
+     * Insert into UberEatsGuiItems
+     *
+     * @param uberEatsGuiItems
+     * @return
+     */
+    public String insUberEatsGuiItems(String storeNo, UberEatsGuiItems uberEatsGuiItems) {
+        return itemsDao.insUberEatsGuiItems(storeNo, uberEatsGuiItems);
     }
 
     /**
@@ -108,13 +131,4 @@ public class UberEatsGuiItemsService {
         return matcher;
     }
 
-    /**
-     * Insert into UberEatsGuiItems
-     *
-     * @param uberEatsGuiItems
-     * @return
-     */
-    public String insUberEatsGuiItems(String storeNo, UberEatsGuiItems uberEatsGuiItems) {
-        return itemsDao.insUberEatsGuiItems(storeNo, uberEatsGuiItems);
-    }
 }
