@@ -11,7 +11,7 @@
     <groupId>com.rtmart</groupId>
     <artifactId>uberReceiptSplit</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+<!--    <packaging>war</packaging>-->
     <name>uberReceiptSplit</name>
     <description>uberReceiptSplit</description>
     <properties>
@@ -25,13 +25,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!-- 打包時排除tomcat -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -81,14 +74,14 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-war-plugin</artifactId>-->
+<!--                <version>3.3.2</version>-->
+<!--                <configuration>-->
+<!--                    <failOnMissingWebXml>false</failOnMissingWebXml>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

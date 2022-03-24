@@ -2,6 +2,7 @@ package com.rtmart.uberreceiptsplit.Entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 
