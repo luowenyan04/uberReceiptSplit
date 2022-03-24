@@ -28,7 +28,7 @@ public class UberEatsGuiItemsService {
      * 清除歷史資料
      * @param request
      */
-    public void chkItemExists(UberEatsGuiItems request) {
+    public void delItemExists(UberEatsGuiItems request) {
         String storeNo = request.getStore();
         String guiNo = request.getGuiNo();
         Integer type = request.getType();
