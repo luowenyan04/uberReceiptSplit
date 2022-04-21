@@ -78,7 +78,7 @@ public class UberEatsGuiItemsService {
 
         for (String s : list) {
 
-            /**
+            /*
              * 因為品名的特殊符號太多不好處理, 所以用"#"拆成前後兩段處理
              * 例如.
              *   品名: 2. (e)台灣乾薑600g+-5%/盒#753525-106 x 1 = 106
